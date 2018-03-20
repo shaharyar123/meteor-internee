@@ -20,3 +20,14 @@ Template.hello.events({
     instance.counter.set(instance.counter.get() + 1);
   },
 });
+
+Template.run.events({
+  'click button' : () => {
+    console.log("I got clicked");
+    let user = {
+      username: "faheem",
+      password: "faheem"
+    };
+    Meteor.call('user.signUp', {user});
+  }
+});
