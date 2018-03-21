@@ -8,10 +8,20 @@
     <p>Hello! {{ currentUser.profile.name }}</p>
     {{/if}}
 
+    <hr/>
+
+    <h3>Account Related</h3>
     {{> signUp }}
     {{> signIn }}
     {{> logout }}
     {{> removeAccount}}
+
+    <hr/>
+
+    <h3>Password Related</h3>
+    {{> changePassword}}
+
+
 </body>
 
 <template name="signUp">
@@ -28,4 +38,10 @@
 
 <template name="removeAccount">
     <button>Delete my account</button>
+</template>
+
+
+
+<template name="changePassword">
+    <button>Change password</button>
 </template>

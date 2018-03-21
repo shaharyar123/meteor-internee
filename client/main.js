@@ -66,3 +66,14 @@ Template.logout.events({
         });
     }
 });
+
+Template.changePassword.events({
+    'click button': () => {
+
+        Accounts.changePassword("faheem", "demo", (err) => {
+            if(err) return alert(err);
+
+            alert("Password changed");
+        })
+    }
+});
