@@ -54,3 +54,15 @@ Template.removeAccount.events({
         });
     }
 });
+
+Template.logout.events({
+    'click button': () => {
+
+        if(!Meteor.user()) return alert("You are not logged in")
+
+        Meteor.logout((err) => {
+            if(err) return alert("Something went wrong");
+            alert("Logged out");
+        });
+    }
+});
