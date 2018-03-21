@@ -42,20 +42,18 @@ export const signUp = new ValidatedMethod({
     }
 });
 
-// We already have builtin login feature from client side
-//export const signIn = new ValidatedMethod({
-//    name: 'user.signIn',
-//    validate: new SimpleSchema({
-//        user: Object,
-//        'user.username': String,
-//        'user.password': String
-//    }).validator(),
-//    run: function({user}){
-//
-//        Meteor.loginWithPassword(user.username, user.password,(Error) => {
-//           if(Error){
-//               throw new Meteor.Error("user.signIn.error", "Failed to login to the account.");
-//           }
-//        });
-//    }
-//});
+export const removeAccount = new ValidatedMethod({
+    name: 'user.removeAccount',
+    validate: null,
+    run: function () {
+        if(!Meteor.user())
+            throw new Error('user.removeAcccount.notLoggedIn', "Login to delete your account")
+
+        try {
+            Meteor.users.remove({username: Meteor.user().username});
+        }
+        catch(error){
+            throw new Error('user.removeAccount.error', "Failed to delete account");
+        }
+    }
+});

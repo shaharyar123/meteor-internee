@@ -26,12 +26,6 @@ Template.signIn.events({
             username: "faheem",
             password: "faheem"
         };
-        //Meteor.call('user.signIn', {user}, (err) => {
-        //    if(err){
-        //        return alert(err.reason);
-        //    }
-        //    alert("Logged in.");
-        //});
 
         Meteor.loginWithPassword(user.username, user.password, (error) => {
             if (error) {
@@ -40,6 +34,20 @@ Template.signIn.events({
             alert("Logged in");
         });
 
-        console.log(currentUser)
+        console.log(Meteor.user());
+    }
+});
+
+Template.removeAccount.events({
+    'click button': () => {
+
+        if(!Meteor.user()) return alert("Not logged in")
+
+        Meteor.call('user.removeAccount', (error) => {
+            if(error){
+                return alert(error);
+            }
+            alert("Deleted");
+        });
     }
 });
