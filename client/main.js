@@ -7,10 +7,12 @@ Template.signUp.events({
     'click button': () => {
         let user = {
             username: "faheem",
-            password: "faheem"
+            password: "faheem",
+            name: "Muhammad Faheem Akhtar",
+            city: "Karachi"
         };
         Meteor.call('user.signUp', {user}, (err) => {
-            if(err){
+            if (err) {
                 return alert(err.reason);
             }
             alert("Account created.");
@@ -32,7 +34,7 @@ Template.signIn.events({
         //});
 
         Meteor.loginWithPassword(user.username, user.password, (error) => {
-            if(error){
+            if (error) {
                 return alert(error.reason);
             }
             alert("Logged in");

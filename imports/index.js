@@ -15,21 +15,34 @@ export const signUp = new ValidatedMethod({
     validate: new SimpleSchema({
         user: Object,
         'user.username': String,
-        'user.password': String
+        'user.password': String,
+        'user.name': {
+            type: String,
+            optional: true
+        },
+        'user.city': {
+            type: String,
+            optional: true
+        }
     }).validator(),
-    run: function({user}){
+    run: function ({user}) {
 
         let newUser = Accounts.createUser({
             username: user.username,
-            password: user.password
+            password: user.password,
+            profile: {
+                name: user.name,
+                city: user.city
+            }
         });
 
-        if(!user){
+        if (!user) {
             throw new Meteor.Error("user.signUp.error", "Failed to create an account.");
         }
     }
 });
 
+// We already have builtin login feature from client side
 //export const signIn = new ValidatedMethod({
 //    name: 'user.signIn',
 //    validate: new SimpleSchema({
