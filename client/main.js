@@ -22,6 +22,9 @@ Template.signUp.events({
 
 Template.signIn.events({
     'click button': () => {
+        if (Meteor.user())
+            return alert("You are already logged in");
+
         let user = {
             username: "faheem",
             password: "faheem"

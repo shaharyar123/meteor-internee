@@ -46,13 +46,13 @@ export const removeAccount = new ValidatedMethod({
     name: 'user.removeAccount',
     validate: null,
     run: function () {
-        if(!Meteor.user())
+        if (!Meteor.user())
             throw new Error('user.removeAcccount.notLoggedIn', "Login to delete your account")
 
         try {
             Meteor.users.remove({username: Meteor.user().username});
         }
-        catch(error){
+        catch (error) {
             throw new Error('user.removeAccount.error', "Failed to delete account");
         }
     }
