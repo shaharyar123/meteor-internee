@@ -3,31 +3,41 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.signUp.events({
+    'click button': () => {
+        let user = {
+            username: "faheem",
+            password: "faheem"
+        };
+        Meteor.call('user.signUp', {user}, (err) => {
+            if(err){
+                return alert(err.reason);
+            }
+            alert("Account created.");
+        });
+    }
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.signIn.events({
+    'click button': () => {
+        let user = {
+            username: "faheem",
+            password: "faheem"
+        };
+        //Meteor.call('user.signIn', {user}, (err) => {
+        //    if(err){
+        //        return alert(err.reason);
+        //    }
+        //    alert("Logged in.");
+        //});
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+        Meteor.loginWithPassword(user.username, user.password, (error) => {
+            if(error){
+                return alert(error.reason);
+            }
+            alert("Logged in");
+        });
 
-Template.run.events({
-  'click button' : () => {
-    console.log("I got clicked");
-    let user = {
-      username: "faheem",
-      password: "faheem"
-    };
-    Meteor.call('user.signUp', {user});
-  }
+        console.log(currentUser)
+    }
 });

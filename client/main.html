@@ -3,17 +3,19 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+    <h1>Welcome to Meteor!</h1>
+    {{#if currentUser  }}
+    <p>Hello! {{ currentUser.username }}</p>
+    {{/if}}
 
-  {{> hello}}
-  {{> run }}
+    {{> signUp }}
+    {{> signIn }}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="signUp">
+    <button>Sign Up</button>
 </template>
 
-<template name="run">
-    <button>Run the Function</button>
+<template name="signIn">
+    <button>Sign In</button>
 </template>

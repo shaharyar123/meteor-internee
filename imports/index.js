@@ -18,14 +18,31 @@ export const signUp = new ValidatedMethod({
         'user.password': String
     }).validator(),
     run: function({user}){
-        console.log(user);
 
         let newUser = Accounts.createUser({
             username: user.username,
             password: user.password
         });
 
-        console.log(newUser);
-        console.log("Users so far: ", Meteor.users)
+        if(!user){
+            throw new Meteor.Error("user.signUp.error", "Failed to create an account.");
+        }
     }
 });
+
+//export const signIn = new ValidatedMethod({
+//    name: 'user.signIn',
+//    validate: new SimpleSchema({
+//        user: Object,
+//        'user.username': String,
+//        'user.password': String
+//    }).validator(),
+//    run: function({user}){
+//
+//        Meteor.loginWithPassword(user.username, user.password,(Error) => {
+//           if(Error){
+//               throw new Meteor.Error("user.signIn.error", "Failed to login to the account.");
+//           }
+//        });
+//    }
+//});
