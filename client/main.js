@@ -7,6 +7,7 @@ Template.signUp.events({
     'click button': () => {
         let user = {
             username: "faheem",
+            email: "hello@mfaheemakhtar.com",
             password: "faheem",
             name: "Muhammad Faheem Akhtar",
             city: "Karachi"
@@ -75,5 +76,17 @@ Template.changePassword.events({
 
             alert("Password changed");
         })
+    }
+});
+
+Template.resetPassword.events({
+    'click button': () => {
+
+        Accounts.forgotPassword({
+            email: "hello@MFaheemAkhtar.com"
+        }, (err) => {
+            if(err) return alert(err);
+            alert("Sent password reset email");
+        });
     }
 });

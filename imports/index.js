@@ -16,6 +16,7 @@ export const signUp = new ValidatedMethod({
         user: Object,
         'user.username': String,
         'user.password': String,
+        'user.email': SimpleSchema.RegEx.EmailWithTLD,
         'user.name': {
             type: String,
             optional: true
@@ -33,6 +34,7 @@ export const signUp = new ValidatedMethod({
         let newUser = Accounts.createUser({
             username: user.username,
             password: user.password,
+            email: user.email,
             profile: {
                 name: user.name,
                 city: user.city
