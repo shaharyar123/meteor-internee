@@ -27,6 +27,9 @@ export const signUp = new ValidatedMethod({
     }).validator(),
     run: function ({user}) {
 
+        if (Meteor.user())
+            throw new Meteor.Error('user.signUp.already', "Please logout to create a new account");
+
         let newUser = Accounts.createUser({
             username: user.username,
             password: user.password,
