@@ -7,6 +7,15 @@ Router.route('/', function () {
     this.render("Home");
 });
 
+Router.route('/dashboard', function () {
+    this.render("Dashboard");
+});
+
+Router.route('/reset', function () {
+    this.render("Reset");
+});
+
+
 Template.signUpButton.events({
     'click button': (e)=> {
         e.preventDefault();
@@ -52,60 +61,67 @@ Template.signInButton.events({
     }
 });
 
-Template.removeAccount.events({
-    'click button': () => {
-
-        if (!Meteor.user()) return alert("Not logged in")
-
-        Meteor.call('user.removeAccount', (error) => {
-            if (error) {
-                return alert(error);
-            }
-            alert("Deleted");
-        });
+Template.forgotPasswordLink.events({
+    'click': (e) => {
+        e.preventDefault();
+        Router.go("/reset");
     }
 });
 
-Template.logout.events({
+Template.sendResetEmail.events({
     'click button': () => {
-
-        if (!Meteor.user()) return alert("You are not logged in")
-
-        Meteor.logout((err) => {
-            if (err) return alert("Something went wrong");
-            alert("Logged out");
-        });
-    }
-});
-
-Template.changePassword.events({
-    'click button': () => {
-
-        Accounts.changePassword("faheem", "demo", (err) => {
-            if (err) return alert(err);
-
-            alert("Password changed");
-        })
-    }
-});
-
-Template.resetPassword.events({
-    'click button': () => {
-
         Accounts.forgotPassword({
-            email: "hello@MFaheemAkhtar.com"
+            email: document.getElementById("email").value
         }, (err) => {
-            if (err) return alert(err);
-            alert("Sent password reset email");
+            if (err)
+                return showAlert('reset-error', err.reason);
+            showAlert('reset-success', "Password reset code sent.");
         });
     }
 });
-
-Template.setPassword().events({
-    'click button': () => {
-        Accounts.resetPassword(token, newPassword, [callback])
-    }
-});
+//
+//Template.removeAccount.events({
+//    'click button': () => {
+//
+//        if (!Meteor.user()) return alert("Not logged in")
+//
+//        Meteor.call('user.removeAccount', (error) => {
+//            if (error) {
+//                return alert(error);
+//            }
+//            alert("Deleted");
+//        });
+//    }
+//});
+//
+//Template.logout.events({
+//    'click button': () => {
+//
+//        if (!Meteor.user()) return alert("You are not logged in")
+//
+//        Meteor.logout((err) => {
+//            if (err) return alert("Something went wrong");
+//            alert("Logged out");
+//        });
+//    }
+//});
+//
+//Template.changePassword.events({
+//    'click button': () => {
+//
+//        Accounts.changePassword("faheem", "demo", (err) => {
+//            if (err) return alert(err);
+//
+//            alert("Password changed");
+//        })
+//    }
+//});
+//
+//Template.setPassword().events({
+//    'click button': () => {
+//        Accounts.resetPassword(token, newPassword, [callback])
+//    }
+//});
 
 function resetAlerts() {
     setTimeout(() => {
@@ -113,7 +129,7 @@ function resetAlerts() {
         document.getElementById("signin-error").innerHTML = "";
         document.getElementById("signup-success").innerHTML = "";
         document.getElementById("signin-success").innerHTML = "";
-    }, 3000);
+    }, 2000);
 }
 
 function showAlert(type, err) {

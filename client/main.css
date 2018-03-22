@@ -69,3 +69,24 @@ footer p {
     text-align: center;
     color: green;
 }
+
+#forgot-password {
+    text-align: center;
+    display: inherit;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+
+
+
+#password-reset-form {
+    display: flex;
+}
+
+#password-reset-form div {
+    justify-content: center;
+}

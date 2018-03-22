@@ -3,53 +3,9 @@
 </head>
 
 <body>
-
-<!--<h1>Welcome to Meteor!</h1>-->
-        <!--{{#if currentUser  }}-->
-<!--<p>Hello! {{ currentUser.profile.name }}</p>-->
-        <!--{{/if}}-->
-
-<!--<hr/>-->
-
-<!--<h3>Account Related</h3>-->
-<!--{{> signUp }}-->
-<!--{{> signIn }}-->
-<!--{{> logout }}-->
-<!--{{> removeAccount}}-->
-
-<!--<hr/>-->
-
-<!--<h3>Password Related</h3>-->
-<!--{{> changePassword}}-->
-<!--{{> resetPassword}}-->
-
-
 </body>
 
-<template name="signUp">
-    <button>Sign Up</button>
-</template>
-
-<template name="signIn">
-    <button>Sign In</button>
-</template>
-
-<template name="logout">
-    <button>Logout</button>
-</template>
-
-<template name="removeAccount">
-    <button>Delete my account</button>
-</template>
-
-
-<template name="changePassword">
-    <button>Change password</button>
-</template>
-
-<template name="resetPassword">
-    <button>Reset password</button>
-</template>
+<!-- HOME -->
 
 <template name="Home">
     <div>
@@ -130,6 +86,8 @@
             {{> signInButton}}
         </div>
 
+        <small id="forgot-password">{{> forgotPasswordLink}}</small>
+
         <div>
             <p class="error" id="signin-error"></p>
             <p class="success" id="signin-success"></p>
@@ -143,4 +101,35 @@
 
 <template name="signInButton">
     <button>SIGN IN</button>
+</template>
+
+<template name="forgotPasswordLink">
+    <a href="#">Forgot password</a>
+</template>
+
+<!-- RESET -->
+
+<template name="Reset">
+
+    <h1 class="text-center">Forgot Password?</h1>
+
+    <form id="password-reset-form">
+        <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" type="text" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-field">
+            {{> sendResetEmail}}
+        </div>
+
+        <div>
+            <p class="error" id="reset-error"></p>
+            <p class="success" id="reset-success"></p>
+        </div>
+    </form>
+</template>
+
+<template name="sendResetEmail">
+    <button>SEND RESET CODE</button>
 </template>
