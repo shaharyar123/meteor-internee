@@ -21,29 +21,31 @@ Template.signUpButton.events({
 
         Meteor.call('user.signUp', {user}, (err) => {
             if (err) {
-                resetErrors();
-                return document.getElementById("signup-error").innerHTML = err.reason;
+                return showAlert("signup-error", err.reason);
             }
-            document.getElementById("signup-success").innerHTML = "Account Created.";
+            showAlert("signup-success", "Account Created");
         });
     }
 });
 
-Template.signIn.events({
-    'click button': () => {
+Template.signInButton.events({
+    'click button': (e) => {
+        e.preventDefault();
+
         if (Meteor.user())
-            return alert("You are already logged in");
+            return showAlert("signin-error", "Already logged in.");
 
         let user = {
-            username: "faheem",
-            password: "faheem"
+            username: document.getElementById('iusername').value,
+            password: document.getElementById('ipassword').value
         };
 
         Meteor.loginWithPassword(user.username, user.password, (error) => {
             if (error) {
-                return alert(error.reason);
+                return showAlert("signin-error", error.reason);
             }
-            alert("Logged in");
+            showAlert("signin-error", "Successfully logged in.");
+            Router.go("/dashboard");
         });
 
         console.log(Meteor.user());
@@ -105,9 +107,16 @@ Template.setPassword().events({
     }
 });
 
-function resetErrors () {
+function resetAlerts() {
     setTimeout(() => {
         document.getElementById("signup-error").innerHTML = "";
         document.getElementById("signin-error").innerHTML = "";
+        document.getElementById("signup-success").innerHTML = "";
+        document.getElementById("signin-success").innerHTML = "";
     }, 3000);
+}
+
+function showAlert(type, err) {
+    document.getElementById(type).innerHTML = err;
+    resetAlerts();
 }

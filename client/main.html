@@ -84,17 +84,17 @@
 
         <div class="form-field">
             <label for="uusername">Username</label>
-            <input id="uusername" type="text" placeholder="Enter your usernamme">
+            <input id="uusername" type="text" placeholder="Enter your usernamme" required>
         </div>
 
         <div class="form-field">
             <label for="uemail">Email</label>
-            <input id="uemail" type="email" placeholder="Enter your email">
+            <input id="uemail" type="email" placeholder="Enter your email" required>
         </div>
 
         <div class="form-field">
             <label for="upassword">Password</label>
-            <input id="upassword" type="text" placeholder="Enter your password">
+            <input id="upassword" type="text" placeholder="Enter your password" required>
         </div>
 
         <div class="form-field">
@@ -118,16 +118,21 @@
     <form>
         <div class="form-field">
             <label for="iusername">Username</label>
-            <input id="iusername" type="text" placeholder="Enter your usernamme">
+            <input id="iusername" type="text" placeholder="Enter your usernamme" required>
         </div>
 
         <div class="form-field">
             <label for="ipassword">Password</label>
-            <input id="ipassword" type="text" placeholder="Enter your password">
+            <input id="ipassword" type="text" placeholder="Enter your password" required>
         </div>
 
         <div class="form-field">
             {{> signInButton}}
+        </div>
+
+        <div>
+            <p class="error" id="signin-error"></p>
+            <p class="success" id="signin-success"></p>
         </div>
     </form>
 </template>
