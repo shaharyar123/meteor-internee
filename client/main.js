@@ -3,15 +3,22 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.signUp.events({
-    'click button': () => {
+Router.route('/', function () {
+    this.render("Home");
+});
+
+Template.signUpButton.events({
+    'click button': (e)=> {
+        e.preventDefault();
+
         let user = {
-            username: "faheem",
-            email: "hello@mfaheemakhtar.com",
-            password: "faheem",
-            name: "Muhammad Faheem Akhtar",
-            city: "Karachi"
+            username: document.getElementById('uusername').value,
+            email: document.getElementById('uemail').value,
+            password: document.getElementById('upassword').value,
+            name: document.getElementById('uname').value,
+            city: document.getElementById('ucity').value
         };
+
         Meteor.call('user.signUp', {user}, (err) => {
             if (err) {
                 return alert(err.reason);
@@ -45,10 +52,10 @@ Template.signIn.events({
 Template.removeAccount.events({
     'click button': () => {
 
-        if(!Meteor.user()) return alert("Not logged in")
+        if (!Meteor.user()) return alert("Not logged in")
 
         Meteor.call('user.removeAccount', (error) => {
-            if(error){
+            if (error) {
                 return alert(error);
             }
             alert("Deleted");
@@ -59,10 +66,10 @@ Template.removeAccount.events({
 Template.logout.events({
     'click button': () => {
 
-        if(!Meteor.user()) return alert("You are not logged in")
+        if (!Meteor.user()) return alert("You are not logged in")
 
         Meteor.logout((err) => {
-            if(err) return alert("Something went wrong");
+            if (err) return alert("Something went wrong");
             alert("Logged out");
         });
     }
@@ -72,7 +79,7 @@ Template.changePassword.events({
     'click button': () => {
 
         Accounts.changePassword("faheem", "demo", (err) => {
-            if(err) return alert(err);
+            if (err) return alert(err);
 
             alert("Password changed");
         })
@@ -85,8 +92,14 @@ Template.resetPassword.events({
         Accounts.forgotPassword({
             email: "hello@MFaheemAkhtar.com"
         }, (err) => {
-            if(err) return alert(err);
+            if (err) return alert(err);
             alert("Sent password reset email");
         });
+    }
+});
+
+Template.setPassword().events({
+    'click button': () => {
+        Accounts.resetPassword(token, newPassword, [callback])
     }
 });

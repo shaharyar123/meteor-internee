@@ -1,26 +1,27 @@
 <head>
-  <title>meteor-internee</title>
+    <title>Meteor ToDo App</title>
 </head>
 
 <body>
-    <h1>Welcome to Meteor!</h1>
-    {{#if currentUser  }}
-    <p>Hello! {{ currentUser.profile.name }}</p>
-    {{/if}}
 
-    <hr/>
+<!--<h1>Welcome to Meteor!</h1>-->
+        <!--{{#if currentUser  }}-->
+<!--<p>Hello! {{ currentUser.profile.name }}</p>-->
+        <!--{{/if}}-->
 
-    <h3>Account Related</h3>
-    {{> signUp }}
-    {{> signIn }}
-    {{> logout }}
-    {{> removeAccount}}
+<!--<hr/>-->
 
-    <hr/>
+<!--<h3>Account Related</h3>-->
+<!--{{> signUp }}-->
+<!--{{> signIn }}-->
+<!--{{> logout }}-->
+<!--{{> removeAccount}}-->
 
-    <h3>Password Related</h3>
-    {{> changePassword}}
-    {{> resetPassword}}
+<!--<hr/>-->
+
+<!--<h3>Password Related</h3>-->
+<!--{{> changePassword}}-->
+<!--{{> resetPassword}}-->
 
 
 </body>
@@ -42,11 +43,93 @@
 </template>
 
 
-
 <template name="changePassword">
     <button>Change password</button>
 </template>
 
 <template name="resetPassword">
     <button>Reset password</button>
+</template>
+
+<template name="Home">
+    <div>
+        <header>
+            <h1>Meteor Todo App</h1>
+        </header>
+
+        <section>
+            <div id="forms">
+                <div id="signup-form">
+                    {{> SignUp }}
+                </div>
+
+                <div id="signin-form">
+                    {{> SignIn }}
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Copyright No One - 2018</p>
+        </footer>
+    </div>
+</template>
+
+<template name="SignUp">
+    <form>
+        <div class="form-field">
+            <label for="uname">Name</label>
+            <input id="uname" type="text" placeholder="Enter your name">
+        </div>
+
+        <div class="form-field">
+            <label for="uusername">Username</label>
+            <input id="uusername" type="text" placeholder="Enter your usernamme">
+        </div>
+
+        <div class="form-field">
+            <label for="uemail">Email</label>
+            <input id="uemail" type="email" placeholder="Enter your email">
+        </div>
+
+        <div class="form-field">
+            <label for="upassword">Password</label>
+            <input id="upassword" type="text" placeholder="Enter your password">
+        </div>
+
+        <div class="form-field">
+            <label for="ucity">City</label>
+            <input id="ucity" type="text" placeholder="Enter your city">
+        </div>
+
+        <div class="form-field">
+            {{> signUpButton }}
+        </div>
+    </form>
+</template>
+
+<template name="SignIn">
+    <form>
+        <div class="form-field">
+            <label for="iusername">Username</label>
+            <input id="iusername" type="text" placeholder="Enter your usernamme">
+        </div>
+
+        <div class="form-field">
+            <label for="ipassword">Password</label>
+            <input id="ipassword" type="text" placeholder="Enter your password">
+        </div>
+
+        <div class="form-field">
+            {{> signInButton}}
+        </div>
+    </form>
+</template>
+
+<template name="signUpButton">
+    <button>SIGN UP</button>
+</template>
+
+<template name="signInButton">
+    <button>SIGN IN</button>
 </template>
