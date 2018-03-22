@@ -21,9 +21,10 @@ Template.signUpButton.events({
 
         Meteor.call('user.signUp', {user}, (err) => {
             if (err) {
-                return alert(err.reason);
+                resetErrors();
+                return document.getElementById("signup-error").innerHTML = err.reason;
             }
-            alert("Account created.");
+            document.getElementById("signup-success").innerHTML = "Account Created.";
         });
     }
 });
@@ -103,3 +104,10 @@ Template.setPassword().events({
         Accounts.resetPassword(token, newPassword, [callback])
     }
 });
+
+function resetErrors () {
+    setTimeout(() => {
+        document.getElementById("signup-error").innerHTML = "";
+        document.getElementById("signin-error").innerHTML = "";
+    }, 3000);
+}

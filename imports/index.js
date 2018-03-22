@@ -31,15 +31,20 @@ export const signUp = new ValidatedMethod({
         if (Meteor.user())
             throw new Meteor.Error('user.signUp.already', "Please logout to create a new account");
 
-        let newUser = Accounts.createUser({
-            username: user.username,
-            password: user.password,
-            email: user.email,
-            profile: {
-                name: user.name,
-                city: user.city
-            }
-        });
+        try {
+            Accounts.createUser({
+                username: user.username,
+                password: user.password,
+                email: user.email,
+                profile: {
+                    name: user.name,
+                    city: user.city
+                }
+            });
+        }
+        catch(err){
+            throw new Meteor.Error("error", err.reason);
+        }
 
         if (!user) {
             throw new Meteor.Error("user.signUp.error", "Failed to create an account.");

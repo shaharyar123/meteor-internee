@@ -59,3 +59,8 @@ footer p {
     margin: 12px;
     text-align: center;
 }
+
+.error {
+    text-align: center;
+    color: red;
+}
