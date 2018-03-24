@@ -115,7 +115,6 @@
 
     <form id="password-reset-form">
         <div class="form-field">
-            <label for="email">Email</label>
             <input id="email" type="text" placeholder="Enter your email" required>
         </div>
 
@@ -123,7 +122,7 @@
             {{> sendResetEmail}}
         </div>
 
-        <div>
+        <div class="alerts">
             <p class="error" id="reset-error"></p>
             <p class="success" id="reset-success"></p>
         </div>

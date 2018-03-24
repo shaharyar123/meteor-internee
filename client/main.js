@@ -4,17 +4,33 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 Router.route('/', function () {
-    this.render("Home");
+    console.log(Meteor.user())
+    if (Meteor.user())
+        Router.go('/dashboard');
+    else
+        this.render("Home");
 });
 
 Router.route('/dashboard', function () {
-    this.render("Dashboard");
+    if (!Meteor.user())
+        Router.go('/');
+    else
+        this.render("Dashboard");
 });
 
 Router.route('/reset', function () {
     this.render("Reset");
 });
 
+Router.route('/logout', function () {
+    Meteor.logout((err) => {
+        if (err)
+            console.log(err);
+        else {
+            Router.go('/');
+        }
+    });
+});
 
 Template.signUpButton.events({
     'click button': (e)=> {
@@ -97,12 +113,7 @@ Template.sendResetEmail.events({
 //Template.logout.events({
 //    'click button': () => {
 //
-//        if (!Meteor.user()) return alert("You are not logged in")
 //
-//        Meteor.logout((err) => {
-//            if (err) return alert("Something went wrong");
-//            alert("Logged out");
-//        });
 //    }
 //});
 //
