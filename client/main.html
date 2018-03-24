@@ -64,6 +64,7 @@
 
         <div>
             <p class="error" id="signup-error"></p>
+
             <p class="success" id="signup-success"></p>
         </div>
 
@@ -90,6 +91,7 @@
 
         <div>
             <p class="error" id="signin-error"></p>
+
             <p class="success" id="signin-success"></p>
         </div>
     </form>
@@ -122,11 +124,12 @@
             {{> sendResetEmail}}
         </div>
 
-        <div class="alerts">
-            <p class="error" id="reset-error"></p>
-            <p class="success" id="reset-success"></p>
-        </div>
+
     </form>
+    <div class="alerts">
+        <p class="error" id="reset-error"></p>
+        <p class="success" id="reset-success"></p>
+    </div>
 </template>
 
 <template name="sendResetEmail">

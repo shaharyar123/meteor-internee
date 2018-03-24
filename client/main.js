@@ -85,13 +85,14 @@ Template.forgotPasswordLink.events({
 });
 
 Template.sendResetEmail.events({
-    'click button': () => {
+    'click button': (e) => {
+        e.preventDefault();
         Accounts.forgotPassword({
             email: document.getElementById("email").value
         }, (err) => {
             if (err)
                 return showAlert('reset-error', err.reason);
-            showAlert('reset-success', "Password reset code sent.");
+            showAlert('reset-success', "Please check your email for password reset link.", 3000);
         });
     }
 });
@@ -134,16 +135,13 @@ Template.sendResetEmail.events({
 //    }
 //});
 
-function resetAlerts() {
+function resetAlert(type, time) {
     setTimeout(() => {
-        document.getElementById("signup-error").innerHTML = "";
-        document.getElementById("signin-error").innerHTML = "";
-        document.getElementById("signup-success").innerHTML = "";
-        document.getElementById("signin-success").innerHTML = "";
-    }, 2000);
+        document.getElementById(type).innerHTML = "";;
+    }, time || 2000);
 }
 
 function showAlert(type, err) {
     document.getElementById(type).innerHTML = err;
-    resetAlerts();
+    resetAlert(type);
 }
