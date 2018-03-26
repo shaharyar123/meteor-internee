@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Session } from 'meteor/session';
 
 import './main.html';
 
@@ -20,6 +21,11 @@ Router.route('/dashboard', function () {
 
 Router.route('/reset', function () {
     this.render("Reset");
+});
+
+Router.route('/reset/new', function () {
+    console.log(Session.get("passwordResetToken"));
+    this.render("Reset-new");
 });
 
 Router.route('/logout', function () {
@@ -77,6 +83,10 @@ Template.signInButton.events({
     }
 });
 
+///////////////////////////////
+//// FORGOT PASSWORD //////////
+//////////////////////////////
+
 Template.forgotPasswordLink.events({
     'click': (e) => {
         e.preventDefault();
@@ -96,6 +106,30 @@ Template.sendResetEmail.events({
         });
     }
 });
+
+Accounts.onResetPasswordLink(function (token, done) {
+    Session.set("passwordResetToken", token);
+    Router.go("/reset/new");
+});
+
+Template.resetPassword.events({
+    'click button' : (e) => {
+        e.preventDefault();
+        let token = Session.get("passwordResetToken");
+        let p = document.getElementById("newPassword").value;
+
+        console.log(p);
+
+        Accounts.resetPassword(token, p, function(err){
+            if(err){
+                showAlert('reset-error', err.reason);
+            }
+            else
+                showAlert('reset-success', "Password successfully changed.");
+        });
+    }
+});
+
 //
 //Template.removeAccount.events({
 //    'click button': () => {
