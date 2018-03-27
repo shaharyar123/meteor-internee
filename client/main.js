@@ -39,12 +39,13 @@ Router.route('/logout', function () {
 });
 
 Router.route('/change-password', function () {
-    console.log("I was there")
-    if (Meteor.user())
-        //Router.go('/');
-    console.log("You are logged in")
-    else
-        this.render("ChangePassword");
+    if(Meteor.user() !== undefined){
+        if (!Meteor.user())
+            Router.go('/');
+        //console.log("You are logged in")
+        else
+            this.render("ChangePassword");
+    }
 });
 
 ///////////////////////////
