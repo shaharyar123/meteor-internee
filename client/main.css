@@ -83,15 +83,11 @@ footer p {
 
 
 
-#password-reset-form {
+#password-reset-form, #password-change-form {
     display: flex;
     justify-content: center;
 }
 
-#password-reset-form div {
+#password-reset-form div, #password-change-form div {
     justify-content: center;
-}
-
-.alerts {
-
 }

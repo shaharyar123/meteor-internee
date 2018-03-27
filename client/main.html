@@ -128,6 +128,7 @@
     </form>
     <div class="alerts">
         <p class="error" id="reset-error"></p>
+
         <p class="success" id="reset-success"></p>
     </div>
 </template>
@@ -151,14 +152,40 @@
 
     </form>
 
-    <a href="/" style="display: block; margin: 15px;" class="text-center">GO HOME</a>
+    <a href="/" style="display: block;margin: 15px;" class="text-center">GO HOME</a>
 
     <div class="alerts">
         <p class="error" id="reset-error"></p>
+
         <p class="success" id="reset-success"></p>
     </div>
 </template>
 
 <template name="resetPassword">
     <button>CHANGE PASSWORD</button>
+</template>
+
+<template name="ChangePassword">
+    <h1 class="text-center">Enter your new Password</h1>
+
+    <form id="password-change-form">
+        <div class="form-field">
+            <input id="oldPassword" type="password" required>
+        </div>
+
+        <div class="form-field">
+            <input id="newPassword" type="password" required>
+        </div>
+
+        <br/>
+
+        <button type="submit" style="padding: 5px;;">Change Password</button>
+    </form>
+
+    <a href="/" style="display: block;margin: 15px;" class="text-center">GO HOME</a>
+
+    <div class="alerts">
+        <p class="error" id="change-error"></p>
+        <p class="success" id="change-success"></p>
+    </div>
 </template>

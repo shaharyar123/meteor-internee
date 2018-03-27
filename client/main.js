@@ -38,6 +38,19 @@ Router.route('/logout', function () {
     });
 });
 
+Router.route('/change-password', function () {
+    console.log("I was there")
+    if (Meteor.user())
+        //Router.go('/');
+    console.log("You are logged in")
+    else
+        this.render("ChangePassword");
+});
+
+///////////////////////////
+///////  EVENTS ///////////
+///////////////////////////
+
 Template.signUpButton.events({
     'click button': (e)=> {
         e.preventDefault();
