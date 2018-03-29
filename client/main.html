@@ -5,7 +5,9 @@
 <body>
 </body>
 
-<!-- HOME -->
+<!---------------------------------------
+--------------   HOME -------------------
+---------------------------------------->
 
 <template name="Home">
     <div>
@@ -64,7 +66,6 @@
 
         <div>
             <p class="error" id="signup-error"></p>
-
             <p class="success" id="signup-success"></p>
         </div>
 
@@ -91,7 +92,6 @@
 
         <div>
             <p class="error" id="signin-error"></p>
-
             <p class="success" id="signin-success"></p>
         </div>
     </form>
@@ -109,7 +109,9 @@
     <a href="#">Forgot password</a>
 </template>
 
-<!-- RESET -->
+<!---------------------------------------
+--------------   RESET ------------------
+---------------------------------------->
 
 <template name="Reset">
 
@@ -123,8 +125,6 @@
         <div class="form-field">
             {{> sendResetEmail}}
         </div>
-
-
     </form>
     <div class="alerts">
         <p class="error" id="reset-error"></p>
@@ -136,6 +136,10 @@
 <template name="sendResetEmail">
     <button>SEND RESET CODE</button>
 </template>
+
+<!---------------------------------------
+--------------  RESET NEW ---------------
+---------------------------------------->
 
 <template name="Reset-new">
 
@@ -156,7 +160,6 @@
 
     <div class="alerts">
         <p class="error" id="reset-error"></p>
-
         <p class="success" id="reset-success"></p>
     </div>
 </template>
@@ -164,6 +167,10 @@
 <template name="resetPassword">
     <button>CHANGE PASSWORD</button>
 </template>
+
+<!---------------------------------------
+--------------  CHANGE ------------------
+---------------------------------------->
 
 <template name="ChangePassword">
     <h1 class="text-center">Enter your new Password</h1>
@@ -179,7 +186,7 @@
 
         <br/>
 
-        <button type="submit" style="padding: 5px;;">Change Password</button>
+        {{> ChangePasswordButton}}
     </form>
 
     <a href="/" style="display: block;margin: 15px;" class="text-center">GO HOME</a>
@@ -188,4 +195,33 @@
         <p class="error" id="change-error"></p>
         <p class="success" id="change-success"></p>
     </div>
+</template>
+
+<template name="ChangePasswordButton">
+    <button>Change Password</button>
+</template>
+
+<!---------------------------------------
+-------------  DASHBOARD ----------------
+---------------------------------------->
+
+<template name="Dashboard">
+    <h1 class="text-center">Todos</h1>
+    {{> DashboardForm}}
+    {{> DashboardList}}
+</template>
+
+<template name="DashboardForm">
+    <div class="Dashboard">
+        <input type="text" id="todo" placeholder="I have to...">
+        {{> DashboardFormSubmit}}
+    </div>
+</template>
+
+<template name="DashboardList">
+
+</template>
+
+<template name="DashboardFormSubmit">
+    <button>ADD TODO</button>
 </template>

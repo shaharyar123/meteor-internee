@@ -3,6 +3,8 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import SimpleSchema from 'simpl-schema';
 import { Accounts } from 'meteor/accounts-base';
 
+import { Todos } from './todos/todos.js';
+
 // simple method
 //Meteor.methods({
 //    printCurrentUser(){
@@ -42,7 +44,7 @@ export const signUp = new ValidatedMethod({
                 }
             });
         }
-        catch(err){
+        catch (err) {
             throw new Meteor.Error("error", err.reason);
         }
 
@@ -66,4 +68,28 @@ export const removeAccount = new ValidatedMethod({
             throw new Error('user.removeAccount.error', "Failed to delete account");
         }
     }
+});
+
+export const addTodo = new ValidatedMethod({
+    name: 'todo.add',
+    validate: new SimpleSchema({
+        todo: "Object",
+        'todo.text' : "String",
+        'todo.isCompleted': {
+            type: "Boolean",
+            defaultValue: false,
+            optional: true
+        }
+    }).validator(),
+    run: function ({ todo }) {
+        console.log(Meteor.user()._id);
+        todo.userId = Meteor.user()._id;
+        Todos.insert(todo);
+    }
+});
+
+Meteor.publish('todos', function () {
+    return Todos.find({}, {
+        userId: Meteor.user()._id
+    });
 });

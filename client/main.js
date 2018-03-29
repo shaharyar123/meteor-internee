@@ -4,6 +4,10 @@ import { Session } from 'meteor/session';
 
 import './main.html';
 
+//////////////////////////////////////////////////////
+////////////////     ROUTES       ////////////////////
+//////////////////////////////////////////////////////
+
 Router.route('/', function () {
     console.log(Meteor.user())
     if (Meteor.user())
@@ -48,9 +52,9 @@ Router.route('/change-password', function () {
     }
 });
 
-///////////////////////////
-///////  EVENTS ///////////
-///////////////////////////
+//////////////////////////////////////////////////////
+////////////////     SIGNUP       ////////////////////
+//////////////////////////////////////////////////////
 
 Template.signUpButton.events({
     'click button': (e)=> {
@@ -72,6 +76,10 @@ Template.signUpButton.events({
         });
     }
 });
+
+//////////////////////////////////////////////////////
+////////////////     SIGNIN       ////////////////////
+//////////////////////////////////////////////////////
 
 Template.signInButton.events({
     'click button': (e) => {
@@ -97,9 +105,9 @@ Template.signInButton.events({
     }
 });
 
-///////////////////////////////
-//// FORGOT PASSWORD //////////
-//////////////////////////////
+//////////////////////////////////////////////////////
+///////////     FORGOT PASSWORD       ////////////////
+//////////////////////////////////////////////////////
 
 Template.forgotPasswordLink.events({
     'click': (e) => {
@@ -144,44 +152,27 @@ Template.resetPassword.events({
     }
 });
 
-//
-//Template.removeAccount.events({
-//    'click button': () => {
-//
-//        if (!Meteor.user()) return alert("Not logged in")
-//
-//        Meteor.call('user.removeAccount', (error) => {
-//            if (error) {
-//                return alert(error);
-//            }
-//            alert("Deleted");
-//        });
-//    }
-//});
-//
-//Template.logout.events({
-//    'click button': () => {
-//
-//
-//    }
-//});
-//
-//Template.changePassword.events({
-//    'click button': () => {
-//
-//        Accounts.changePassword("faheem", "demo", (err) => {
-//            if (err) return alert(err);
-//
-//            alert("Password changed");
-//        })
-//    }
-//});
-//
-//Template.setPassword().events({
-//    'click button': () => {
-//        Accounts.resetPassword(token, newPassword, [callback])
-//    }
-//});
+//////////////////////////////////////////////////////
+///////////     CHANGE PASSWORD       ////////////////
+//////////////////////////////////////////////////////
+
+Template.ChangePasswordButton.events({
+    'click button'(event, instance){
+        event.preventDefault();
+        let oldPassword = document.getElementById("oldPassword").value,
+            newPassword = document.getElementById("newPassword").value
+
+        Accounts.changePassword(oldPassword, newPassword, (err, res) => {
+            if(err) return showAlert("change-error", "Failed to change password");
+            showAlert("change-success", "Password changed");
+        });
+    }
+});
+
+
+//////////////////////////////////////////////////////
+////////////////     HELPERS       ///////////////////
+//////////////////////////////////////////////////////
 
 function resetAlert(type, time) {
     setTimeout(() => {
@@ -193,3 +184,20 @@ function showAlert(type, err) {
     document.getElementById(type).innerHTML = err;
     resetAlert(type);
 }
+
+
+Template.DashboardFormSubmit.events({
+    'click button'(event) {
+        event.preventDefault();
+
+        let todo = {
+            text: "Hi"
+        };
+
+        Meteor.call('todo.add', { todo });
+
+
+    }
+});
+
+console.log(Meteor.subscribe('todos'));

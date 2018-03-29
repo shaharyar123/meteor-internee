@@ -91,3 +91,20 @@ footer p {
 #password-reset-form div, #password-change-form div {
     justify-content: center;
 }
+
+
+.Dashboard {
+    display: flex;
+    justify-content: center;
+}
+
+.Dashboard input {
+    margin-top: 10px;
+    padding: 15px;
+    width: 70%;
+}
+
+.Dashboard button{
+    margin-top: 10px;
+    padding: 15px;
+}
